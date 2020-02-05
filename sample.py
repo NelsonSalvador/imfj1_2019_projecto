@@ -47,7 +47,7 @@ def main():
 
     # Specify the rotation of the object. It will rotate 15 degrees around the axis given, 
     # every second
-    angle = 15
+    angle = 0
     axis = vector3(1,0.7,0.2)
     axis.normalize()
 
@@ -69,6 +69,20 @@ def main():
             elif (event.type == pygame.KEYDOWN):
                 if (event.key == pygame.K_ESCAPE):
                     return
+                if (event.key == pygame.K_UP):
+                    axis = vector3(-1,0,0)
+                    angle = 50
+                if (event.key == pygame.K_DOWN):
+                    axis = vector3(1,0,0)
+                    angle = 50
+                if (event.key == pygame.K_RIGHT):
+                    axis = vector3(0,1,0)
+                    angle = 50 
+                if (event.key == pygame.K_LEFT):
+                    axis = vector3(0,-1,0)
+                    angle = 50                     
+            elif (event.type == pygame.KEYUP):
+                angle = 0
 
         # Clears the screen with a very dark blue (0, 0, 20)
         screen.fill((0,0,0))
