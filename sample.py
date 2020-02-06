@@ -22,7 +22,7 @@ def main():
     kpgup = False
     kpgdown = False
     ks = False
-    Ka = False
+    ka = False
     kd = False
     kw = False
     kq = False
@@ -96,6 +96,18 @@ def main():
                     kpgdown = True
                 if (event.key == pygame.K_PAGEUP):
                     kpgup = True
+                if (event.key == pygame.K_w):
+                    kw = True
+                if (event.key == pygame.K_a):
+                    ka = True
+                if (event.key == pygame.K_s):
+                    ks = True
+                if (event.key == pygame.K_d):
+                    kd = True
+                if (event.key == pygame.K_q):
+                    kq = True
+                if (event.key == pygame.K_e):
+                    ke = True
             elif (event.type == pygame.KEYUP):
                 if (event.key == pygame.K_UP):
                     kup = False
@@ -109,6 +121,18 @@ def main():
                     kpgup = False
                 if (event.key == pygame.K_PAGEDOWN):
                     kpgdown = False
+                if (event.key == pygame.K_w):
+                    kw = False
+                if (event.key == pygame.K_a):
+                    ka = False
+                if (event.key == pygame.K_s):
+                    ks = False
+                if (event.key == pygame.K_d):
+                    kd = False
+                if (event.key == pygame.K_q):
+                    kq = False
+                if (event.key == pygame.K_e):
+                    ke = False
                   
         if kup:
             axis = vector3(-1, 0, 0)
@@ -140,6 +164,18 @@ def main():
             angle = 50
             q = from_rotation_vector((axis * math.radians(angle) * delta_time).to_np3())
             obj1.rotation = q * obj1.rotation
+        if kq:
+            scene.camera.position -= vector3(0,0,0.001)
+        if ke:
+            scene.camera.position += vector3(0,0,0.001)
+        if ka:
+            scene.camera.position += vector3(0.001,0,0)
+        if kd:
+            scene.camera.position -= vector3(0.001,0,0)
+        if kw:
+            scene.camera.position -= vector3(0,0.001,0)
+        if ks:
+            scene.camera.position += vector3(0,0.001,0)
 
         # Clears the screen with a very dark blue (0, 0, 20)
         screen.fill((0,0,20))
