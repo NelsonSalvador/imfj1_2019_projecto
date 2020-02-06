@@ -14,6 +14,21 @@ def main():
     # Initialize pygame, with the default parameters
     pygame.init()
 
+    #Incialização de variaveis 
+    kup = False
+    kdown = False
+    kright = False
+    kleft = False
+    kpgup = False
+    kpgdown = False
+    ks = False
+    Ka = False
+    kd = False
+    kw = False
+    kq = False
+    ke = False
+    
+
     # Define the size/resolution of our window
     res_x = 640
     res_y = 480
@@ -70,26 +85,64 @@ def main():
                 if (event.key == pygame.K_ESCAPE):
                     return
                 if (event.key == pygame.K_UP):
-                    axis = vector3(-1,0,0)
-                    angle = 50
+                    kup = True
                 if (event.key == pygame.K_DOWN):
-                    axis = vector3(1,0,0)
-                    angle = 50
+                    kdown = True
                 if (event.key == pygame.K_RIGHT):
-                    axis = vector3(0,1,0)
-                    angle = 50 
+                    kright = True
                 if (event.key == pygame.K_LEFT):
-                    axis = vector3(0,-1,0)
-                    angle = 50                     
+                    kleft = True
+                if (event.key == pygame.K_PAGEDOWN):
+                    kpgdown = True
+                if (event.key == pygame.K_PAGEUP):
+                    kpgup = True
             elif (event.type == pygame.KEYUP):
-                angle = 0
+                if (event.key == pygame.K_UP):
+                    kup = False
+                if (event.key == pygame.K_DOWN):
+                    kdown = False
+                if (event.key == pygame.K_RIGHT):
+                    kright = False
+                if (event.key == pygame.K_LEFT):
+                    kleft = False
+                if (event.key == pygame.K_PAGEUP):
+                    kpgup = False
+                if (event.key == pygame.K_PAGEDOWN):
+                    kpgdown = False
+                  
+        if kup:
+            axis = vector3(-1, 0, 0)
+            angle = 50
+            q = from_rotation_vector((axis * math.radians(angle) * delta_time).to_np3())
+            obj1.rotation = q * obj1.rotation
+        if kdown:
+            axis = vector3(1,0,0)
+            angle = 50
+            q = from_rotation_vector((axis * math.radians(angle) * delta_time).to_np3())
+            obj1.rotation = q * obj1.rotation
+        if kright:
+            axis = vector3(0,1,0)
+            angle = 50
+            q = from_rotation_vector((axis * math.radians(angle) * delta_time).to_np3())
+            obj1.rotation = q * obj1.rotation
+        if kleft:
+            axis = vector3(0,-1,0)
+            angle = 50
+            q = from_rotation_vector((axis * math.radians(angle) * delta_time).to_np3())
+            obj1.rotation = q * obj1.rotation
+        if kpgup:
+            axis = vector3(0,0,1)
+            angle = 50
+            q = from_rotation_vector((axis * math.radians(angle) * delta_time).to_np3())
+            obj1.rotation = q * obj1.rotation
+        if kpgdown:
+            axis = vector3(0,0,-1)
+            angle = 50
+            q = from_rotation_vector((axis * math.radians(angle) * delta_time).to_np3())
+            obj1.rotation = q * obj1.rotation
 
         # Clears the screen with a very dark blue (0, 0, 20)
-        screen.fill((0,0,0))
-
-        # Rotates the object, considering the time passed (not linked to frame rate)
-        q = from_rotation_vector((axis * math.radians(angle) * delta_time).to_np3())
-        obj1.rotation = q * obj1.rotation
+        screen.fill((0,0,20))
 
         scene.render(screen)
 
